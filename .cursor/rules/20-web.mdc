@@ -1,0 +1,44 @@
+---
+description: Next.js + Redux persist conventions for web/
+globs: web/**
+alwaysApply: false
+---
+
+# Web (`web/`) — Next.js 16 + Tailwind 4 + Redux persist
+
+## Folder map
+
+```
+web/src/app/            routes only (thin pages)
+web/src/components/     reusable UI
+web/src/store/          Redux store, persist, slices
+web/src/lib/api.ts      the only HTTP client
+web/src/lib/types.ts    DTO shapes matching the Nest API
+```
+
+Pages compose components and dispatch/select. They do not contain Prisma, raw `fetch`, or ad-hoc `localStorage`.
+
+## Redux
+
+- Store: `web/src/store/store.ts`
+- Hooks: `web/src/store/hooks.ts` (`useAppDispatch`, `useAppSelector`)
+- Persist whitelist: `auth`, `filters`, `buyerFilters`, `locale`
+- `auth`: JWT + current user (demo prototype)
+- `filters`: catalog query that must survive refresh
+- `buyerFilters`: seller desk buyer search
+- `locale`: EN/UK UI language
+- Server listings/inquiries are **not** persisted in Redux — refetch from Nest
+
+New client state: add a slice next to the others, then whitelist it only if it must survive refresh.
+
+## Next.js
+
+- App Router in `src/app`
+- Interactive Redux UI is `"use client"`
+- `StoreProvider` wraps the tree in `app/layout.tsx`
+- Authz UX (hide nav, redirect) is client-side; **real** authz is Nest
+
+## Tailwind
+
+Use the tokens in `globals.css`: `background`, `foreground`, `gold`, `gold-2`, `card`, `muted`, `line`.
+Dark fintech look (N5Deal-inspired). Do not introduce a second palette.

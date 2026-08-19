@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+jspm_packages/
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Build / cache
+dist
+.next
+out
+coverage
+*.lcov
+*.tsbuildinfo
+.eslintcache
+.cache
+.parcel-cache
+.vite/
+
+# Prisma / SQLite leftovers
+api/generated
+*.db
+*.db-journal
+
+# Tests
+test-results
+playwright-report
+blob-report
+
+# OS / IDE
+.DS_Store
+*.pem
+
+# TypeScript
+web/next-env.d.ts

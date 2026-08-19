@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+:root {
+  --background: #07080c;
+  --foreground: #f3efe4;
+  --gold: #c9a45c;
+  --gold-2: #e0c07a;
+  --card: #10131a;
+  --muted: #8b8a84;
+  --line: #242833;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-gold: var(--gold);
+  --color-gold-2: var(--gold-2);
+  --color-card: var(--card);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+input,
+select,
+textarea,
+button {
+  font: inherit;
+}
+
+textarea {
+  resize: none;
+}
+
+input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
+textarea {
+  outline: none;
+  transition: border-color 160ms ease;
+}
+
+input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):hover,
+textarea:hover {
+  border-color: color-mix(in srgb, var(--gold) 50%, var(--line));
+}
+
+input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):focus,
+textarea:focus {
+  border-color: var(--gold);
+}
+
+@layer base {
+  a,
+  button:not(:disabled),
+  [role="button"]:not(:disabled),
+  label,
+  select,
+  summary,
+  input[type="checkbox"],
+  input[type="radio"] {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+
+  button:not(:disabled) {
+    transition:
+      border-color 160ms ease,
+      background-color 160ms ease,
+      color 160ms ease,
+      opacity 160ms ease;
+  }
+}
+
+::selection {
+  background: #c9a45c;
+  color: #07080c;
+}

@@ -1,0 +1,123 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  BUYER
+  SELLER
+  MANAGER
+}
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+}
+
+enum AssetStatus {
+  DRAFT
+  PUBLISHED
+  SUSPENDED
+}
+
+enum BusinessCategory {
+  BANK
+  FINTECH
+  PAYMENT
+  EMI
+  CRYPTO
+}
+
+enum BusinessStatus {
+  ACTIVE
+  LICENSE_ONLY
+}
+
+enum InquiryStatus {
+  OPEN
+  CLOSED
+}
+
+model User {
+  id        String     @id @default(cuid())
+  email     String     @unique
+  password  String
+  name      String
+  company   String?
+  country   String?
+  role      Role
+  status    UserStatus @default(ACTIVE)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  assets            Asset[]
+  buyerProfile      BuyerProfile?
+  inquiriesSent     Inquiry[]     @relation("InquiryFrom")
+  inquiriesReceived Inquiry[]     @relation("InquiryTo")
+}
+
+model Asset {
+  id             String           @id @default(cuid())
+  publicCode     String           @unique
+  sellerId       String
+  seller         User             @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  title          String
+  country        String
+  countryName    String
+  category       BusinessCategory
+  licenseType    String
+  licenseName    String
+  regulator      String?
+  businessStatus BusinessStatus
+  assetType      String
+  priceEur       Int
+  employees      Int?
+  yearOfIssue    Int?
+  included       String
+  summary        String
+  status         AssetStatus      @default(PUBLISHED)
+  isTopDeal      Boolean          @default(false)
+  isValidated    Boolean          @default(true)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  inquiries      Inquiry[]
+
+  @@index([sellerId])
+  @@index([category, country])
+}
+
+model BuyerProfile {
+  userId       String   @id
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ticketMinEur Int
+  ticketMaxEur Int
+  countries    String
+  categories   String
+  licenses     String
+  thesis       String
+  updatedAt    DateTime @updatedAt
+}
+
+model Inquiry {
+  id           String        @id @default(cuid())
+  threadKey    String        @unique
+  fromUserId   String
+  fromUser     User          @relation("InquiryFrom", fields: [fromUserId], references: [id], onDelete: Cascade)
+  toUserId     String
+  toUser       User          @relation("InquiryTo", fields: [toUserId], references: [id], onDelete: Cascade)
+  assetId      String?
+  asset        Asset?        @relation(fields: [assetId], references: [id], onDelete: SetNull)
+  message      String
+  matchScore   Int?
+  matchReasons String?
+  status       InquiryStatus @default(OPEN)
+  createdAt    DateTime      @default(now())
+
+  @@index([fromUserId])
+  @@index([toUserId])
+}

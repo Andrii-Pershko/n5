@@ -1,0 +1,54 @@
+---
+description: N5Deal marketplace architecture — always follow this map before editing
+alwaysApply: true
+---
+
+# N5Deal prototype — project map
+
+This repo is a **split-stack marketplace prototype**, not a Next.js monolith.
+
+```
+web/   → Next.js App Router + TS + Tailwind + Redux Toolkit + redux-persist
+api/   → NestJS + Prisma 7 + PostgreSQL (pg adapter)
+```
+
+Do **not** invent a third app, a shared package, GraphQL, or a Next.js Route Handler "API". All business writes go through Nest.
+
+## Where things live
+
+| Need | Put it here | Never here |
+|---|---|---|
+| DB schema, migrations, seed | `api/prisma/` | `web/` |
+| Prisma Client | `api/src/prisma/` + generated `api/generated/prisma` | `web/` |
+| Auth, roles, policies, matching | `api/src/**` | React components |
+| JWT session in UI | `web/src/store/slices/authSlice.ts` (persisted) | cookies in Next, localStorage ad-hoc |
+| Listing filters in UI | `web/src/store/slices/filtersSlice.ts` (persisted) | URL-only (URL may mirror, Redux is source) |
+| HTTP calls | `web/src/lib/api.ts` | random `fetch` in components |
+| Domain types shared with UI | `web/src/lib/types.ts` must **mirror API**, not Prisma |
+
+## Product invariants (do not "simplify" away)
+
+- Three roles: `BUYER` | `SELLER` | `MANAGER`
+- Public catalog hides seller identity (`Confidential`)
+- Contact = **Inquiry**, not chat/email
+- Suspended users/assets disappear from public catalog
+- Persist after refresh = **Prisma DB** (server) + **redux-persist** (auth + filters)
+- Smart Match is **rule-based** in `api/src/matching/matching.ts` (no LLM in the hot path)
+
+## How to add a feature
+
+1. Identify the role and the policy (who can read/write).
+2. Add/extend Prisma model only if data must survive refresh for all users.
+3. Nest module: `dto → service (policy + prisma) → controller`.
+4. Add a function in `web/src/lib/api.ts`.
+5. If it is session/filter state, put it in a Redux slice and whitelist it in `persistConfig`.
+6. UI in `web/src/app/**` (pages) and `web/src/components/**` (reusable).
+
+## Do not
+
+- Put Prisma or Nest code in `web/`
+- Put Redux or React in `api/`
+- Use `localStorage` directly — go through redux-persist
+- Use NextAuth / Clerk / server actions for this prototype
+- Call OpenAI for matching
+- Wander the repo looking for "the backend" — it is only `api/src`

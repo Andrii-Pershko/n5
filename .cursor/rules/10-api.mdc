@@ -1,0 +1,46 @@
+---
+description: NestJS + Prisma conventions for api/
+globs: api/**
+alwaysApply: false
+---
+
+# API (`api/`) — NestJS 11 + Prisma 7
+
+## Module pattern
+
+One domain folder = one Nest module:
+
+```
+api/src/<domain>/
+  <domain>.module.ts
+  <domain>.controller.ts
+  <domain>.service.ts
+  dto/*.dto.ts
+```
+
+Existing domains: `auth`, `assets`, `buyers`, `inquiries`, `admin`, `prisma`, `matching`.
+Reuse them. Create a new folder only for a new bounded context.
+
+## Prisma 7
+
+- Schema: `api/prisma/schema.prisma` (no `url` in datasource)
+- Config: `api/prisma.config.ts` (`DATABASE_URL` lives here)
+- Client output: `api/generated/prisma` with `moduleFormat = "cjs"`
+- Runtime: `PrismaService` **must** pass `PrismaPg` adapter (`@prisma/adapter-pg`)
+- After schema change: `npx prisma migrate dev` from `api/`, then `npx prisma generate`
+- Seed: `api/prisma/seed.ts` (also needs the adapter)
+
+Never import `@prisma/client` as a constructed client without an adapter.
+
+## HTTP
+
+- Validation: class-validator DTOs + global `ValidationPipe` (`whitelist`, `transform`)
+- Auth: `@UseGuards(JwtAuthGuard)` + `@Roles(...)` + `@CurrentUser()`
+- Public catalog: `OptionalJwtGuard` so match score works when a buyer is logged in
+- Never return `password`
+- Seller identity on public assets: `Confidential` unless viewer is manager or owner
+
+## Policy
+
+Keep authorization in services (`api/src/common` guards + service checks), not only in the UI.
+Matching and listing warnings live in `api/src/matching/` so they stay unit-testable without HTTP.
