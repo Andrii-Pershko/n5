@@ -18,11 +18,12 @@ services:
   api:
     build:
       context: ./api
+    env_file:
+      - ./api/.env
     environment:
+      # Host `postgres` is the Compose DNS name; api/.env still uses localhost for npm run start:dev
       DATABASE_URL: postgresql://n5deal:n5deal@postgres:5432/n5deal
-      JWT_SECRET: n5deal-dev-jwt-secret-change-me
       PORT: "4000"
-      WEB_ORIGIN: ${WEB_ORIGIN:-http://localhost:3301}
     ports:
       - "3302:4000"
     depends_on:
@@ -32,10 +33,8 @@ services:
   web:
     build:
       context: ./web
-      args:
-        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:3302}
-    environment:
-      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:3302}
+    env_file:
+      - ./web/.env
     ports:
       - "3301:3000"
     depends_on:

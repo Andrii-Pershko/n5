@@ -34,11 +34,12 @@ docker compose up --build
 - API: http://localhost:3302
 - Postgres: localhost:3303 (`n5deal` / `n5deal` / db `n5deal`)
 
-На VPS, якщо браузер відкриває не `localhost`, перезберіть з публічним хостом:
+На VPS пропиши публічний хост у файлах сервісів, потім перезбери:
+
+- `web/.env` → `NEXT_PUBLIC_API_URL=http://YOUR_HOST:3302`
+- `api/.env` → `WEB_ORIGIN=http://YOUR_HOST:3301`
 
 ```bash
-NEXT_PUBLIC_API_URL=http://YOUR_HOST:3302 \
-WEB_ORIGIN=http://YOUR_HOST:3301 \
 docker compose up --build -d
 ```
 
@@ -146,11 +147,12 @@ Detached (no logs in the terminal): `docker compose up --build -d`
 - API: http://localhost:3302
 - Postgres: localhost:3303 (`n5deal` / `n5deal` / db `n5deal`)
 
-On a VPS, if the browser does not use `localhost`, rebuild with the public host:
+On a VPS, set the public host in the service env files, then rebuild:
+
+- `web/.env` → `NEXT_PUBLIC_API_URL=http://YOUR_HOST:3302`
+- `api/.env` → `WEB_ORIGIN=http://YOUR_HOST:3301`
 
 ```bash
-NEXT_PUBLIC_API_URL=http://YOUR_HOST:3302 \
-WEB_ORIGIN=http://YOUR_HOST:3301 \
 docker compose up --build -d
 ```
 
