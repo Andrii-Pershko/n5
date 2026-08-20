@@ -20,9 +20,11 @@ Take-home прототип M&A-маркетплейсу для ліцензов�
 
 Усе піднімається **однією командою** Compose: **web + api + postgres**. Це і є deployed version для рев’ю — `http://localhost:3301`.
 
-Host-порти — третій стек на VPS: **3301 / 3302 / 3303**. Всередині мережі Compose лишаються 3000 / 4000 / 5432.
+Host-порти: **3301 / 3302 / 3303**. Всередині мережі Compose лишаються 3000 / 4000 / 5432.
 
 ### Запуск
+
+перейменувати .env.example в .env та прописати там актуальні дані.
 
 ```bash
 docker compose up --build
@@ -133,9 +135,11 @@ This is a **discovery + confidential intro** product: buyers browse assets, sell
 
 The deployed version for review is **one command** — Docker Compose: **web + api + postgres** at `http://localhost:3301`.
 
-Host ports are the third stack on the VPS: **3301 / 3302 / 3303**. Inside the Compose network the apps still listen on 3000 / 4000 / 5432.
+Host ports: **3301 / 3302 / 3303**. Inside the Compose network the apps still listen on 3000 / 4000 / 5432.
 
 ### Launch
+
+rename .env.examle to .env and enter corect data.
 
 ```bash
 docker compose up --build
