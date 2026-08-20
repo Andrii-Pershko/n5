@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { InquiryForm } from '@/components/inquiry/InquiryForm';
@@ -81,6 +82,9 @@ export default function AssetDetailPage() {
         ) : (
           <div className="border border-line bg-card p-4 text-sm text-muted">
             {t('asset.signInToInquire')}
+            <Link href="/signin" className="mt-3 block text-gold hover:text-gold-2">
+              {t('nav.signIn')}
+            </Link>
           </div>
         )}
       </aside>

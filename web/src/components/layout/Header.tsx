@@ -57,14 +57,14 @@ export function Header() {
           )}
         </nav>
         <div className="flex items-center gap-3 text-sm">
-          <div className="flex rounded-full border border-line text-xs">
+          <div className="flex overflow-hidden rounded-full border border-line text-xs">
             {LOCALES.map((item) => (
               <button
                 key={item}
                 type="button"
                 onClick={() => dispatch(setLocale(item))}
                 className={classNames(
-                  'px-2 py-1 uppercase',
+                  'px-2 py-1 uppercase first:rounded-l-full last:rounded-r-full',
                   locale === item ? 'bg-gold/15 text-gold' : 'text-muted hover:text-gold',
                 )}
               >
@@ -91,9 +91,14 @@ export function Header() {
               </button>
             </>
           ) : (
-            <Link href="/" className="text-gold hover:text-gold-2">
-              {t('nav.signIn')}
-            </Link>
+            <>
+              <Link href="/register" className="text-muted hover:text-gold">
+                {t('nav.createAccount')}
+              </Link>
+              <Link href="/signin" className="text-gold hover:text-gold-2">
+                {t('nav.signIn')}
+              </Link>
+            </>
           )}
         </div>
       </div>

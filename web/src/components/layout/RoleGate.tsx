@@ -19,7 +19,7 @@ export function RoleGate({
 
   useEffect(() => {
     if (!user) {
-      router.replace('/');
+      router.replace('/signin');
     }
   }, [user, router]);
 

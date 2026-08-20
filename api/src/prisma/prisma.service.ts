@@ -11,7 +11,7 @@ export class PrismaService
   constructor(config: ConfigService) {
     const url =
       config.get<string>('DATABASE_URL') ??
-      'postgresql://n5deal:n5deal@localhost:5432/n5deal';
+      'postgresql://n5deal:n5deal@localhost:5003/n5deal';
     super({ adapter: new PrismaPg({ connectionString: url }) });
   }
 

@@ -18,7 +18,9 @@ Take-home прототип M&A-маркетплейсу для ліцензов�
 | API | `api/` | NestJS 11, Prisma 7, **PostgreSQL** (адаптер `@prisma/adapter-pg`), JWT |
 | DB | Docker `postgres` | PostgreSQL 16 |
 
-Усе піднімається одним Compose: **web + api + postgres**. Це і є deployed version для рев’ю — `http://localhost:3000`.
+Усе піднімається одним Compose: **web + api + postgres**. Це і є deployed version для рев’ю — `http://localhost:5000`.
+
+Host-порти навмисно зміщені (5000 / 5001 / 5003), щоб не конфліктувати з іншими Docker-стеками на VPS. Всередині мережі Compose лишаються 3000 / 4000 / 5432.
 
 ### Запуск (Docker — рекомендовано)
 
@@ -26,9 +28,17 @@ Take-home прототип M&A-маркетплейсу для ліцензов�
 docker compose up --build
 ```
 
-- Web: http://localhost:3000 (if 3000 is busy: `WEB_PORT=3001 docker compose up --build`)
-- API: http://localhost:4000
-- Postgres: localhost:5432 (`n5deal` / `n5deal` / db `n5deal`)
+- Web: http://localhost:5000
+- API: http://localhost:5001
+- Postgres: localhost:5003 (`n5deal` / `n5deal` / db `n5deal`)
+
+На VPS, якщо браузер відкриває не `localhost`, перезберіть з публічним хостом:
+
+```bash
+NEXT_PUBLIC_API_URL=http://YOUR_HOST:5001 \
+WEB_ORIGIN=http://YOUR_HOST:5000 \
+docker compose up --build -d
+```
 
 Перший старт робить `prisma migrate deploy` і seed (ті самі демо-дані, що були в SQLite). Повторний старт **не затирає** нових користувачів: seed пропускається, якщо в БД уже є users.
 
@@ -45,6 +55,7 @@ Postgres усе одно потрібен (можна лише сервіс `pos
 
 ```bash
 docker compose up postgres -d
+# Postgres з хоста: localhost:5003
 
 # API
 cd api
@@ -53,7 +64,7 @@ npx prisma generate
 npx prisma migrate deploy
 npx prisma db seed
 npm run start:dev
-# http://localhost:4000
+# http://localhost:4000  (локальний Nest, не Docker)
 
 # Web (другий термінал)
 cd web
@@ -89,7 +100,8 @@ npm run dev
 cd api && npm test          # Jest: matching, auth signup, admin hard-delete, buyer filters
 cd web && npm test          # Vitest: i18n
 cd web && npx playwright install chromium && npm run test:e2e
-# e2e очікує запущений web на http://localhost:3000
+# e2e: E2E_BASE_URL=http://localhost:5000 npm run test:e2e  (Docker web)
+# або http://localhost:3000, якщо крутиться npm run dev
 ```
 
 ### Ключові технічні рішення
@@ -139,7 +151,9 @@ This is a **discovery + confidential intro** product: buyers browse assets, sell
 | API | `api/` | NestJS 11, Prisma 7, **PostgreSQL** (`@prisma/adapter-pg`), JWT |
 | DB | Docker `postgres` | PostgreSQL 16 |
 
-The deployed version for review is Docker Compose: **web + api + postgres** at `http://localhost:3000`.
+The deployed version for review is Docker Compose: **web + api + postgres** at `http://localhost:5000`.
+
+Host ports are shifted (5000 / 5001 / 5003) so they do not collide with other Docker stacks on a VPS. Inside the Compose network the apps still listen on 3000 / 4000 / 5432.
 
 ### Launch (Docker — recommended)
 
@@ -147,9 +161,17 @@ The deployed version for review is Docker Compose: **web + api + postgres** at `
 docker compose up --build
 ```
 
-- Web: http://localhost:3000 (if 3000 is busy: `WEB_PORT=3001 docker compose up --build`)
-- API: http://localhost:4000
-- Postgres: localhost:5432 (`n5deal` / `n5deal` / db `n5deal`)
+- Web: http://localhost:5000
+- API: http://localhost:5001
+- Postgres: localhost:5003 (`n5deal` / `n5deal` / db `n5deal`)
+
+On a VPS, if the browser does not use `localhost`, rebuild with the public host:
+
+```bash
+NEXT_PUBLIC_API_URL=http://YOUR_HOST:5001 \
+WEB_ORIGIN=http://YOUR_HOST:5000 \
+docker compose up --build -d
+```
 
 First boot runs migrations and the same demo seed that previously lived in SQLite. Later boots **do not wipe** sign-ups: seed is skipped if users already exist.
 
@@ -166,6 +188,7 @@ Postgres is still required (the `postgres` service is enough):
 
 ```bash
 docker compose up postgres -d
+# Postgres from the host: localhost:5003
 
 # 1. API
 cd api
@@ -174,7 +197,7 @@ npx prisma generate
 npx prisma migrate deploy
 npx prisma db seed
 npm run start:dev
-# http://localhost:4000
+# http://localhost:4000  (local Nest, not Docker)
 
 # 2. Web (second terminal)
 cd web
@@ -210,7 +233,8 @@ Suggested review path:
 cd api && npm test          # Jest: matching, signup, hard-delete, buyer filters
 cd web && npm test          # Vitest: i18n
 cd web && npx playwright install chromium && npm run test:e2e
-# e2e expects the web app at http://localhost:3000
+# e2e: E2E_BASE_URL=http://localhost:5000 npm run test:e2e  (Docker web)
+# or http://localhost:3000 if you are on npm run dev
 ```
 
 ### Key technical decisions

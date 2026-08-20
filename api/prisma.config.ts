@@ -10,6 +10,6 @@ export default defineConfig({
   datasource: {
     url:
       process.env.DATABASE_URL ??
-      'postgresql://n5deal:n5deal@localhost:5432/n5deal',
+      'postgresql://n5deal:n5deal@localhost:5003/n5deal',
   },
 });

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { LocaleSync } from "@/components/layout/LocaleSync";
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
   description: "M&A discovery prototype for licensed fintech and banking assets.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
