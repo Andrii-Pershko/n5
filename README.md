@@ -107,7 +107,7 @@ cd web && npx playwright install chromium && npm run test:e2e
 ### Ключові технічні рішення
 
 - **Стек навмисно розділений.** Next.js — UI. NestJS володіє auth, політиками й persistence.
-- **Docker Compose = deploy-артефакт.** Web, API і PostgreSQL збираються разом; SQLite прибрано.
+- **Docker Compose** Web, API і PostgreSQL збираються разом; SQLite прибрано.
 - **Prisma 7 + PostgreSQL** — реляційна модель з каскадним hard delete. У рантаймі потрібен драйвер-адаптер `PrismaPg`.
 - **JWT у Redux persist** — через обмеження завдання («має бути redux + persist» і «стан живе після refresh»). У проді токен був би в httpOnly cookie.
 - **Inquiry, не чат.** Контакт — збережене intro з match score. Ім’я seller на публічних картках — `Confidential`.
@@ -125,15 +125,18 @@ cd web && npx playwright install chromium && npm run test:e2e
 ### Які AI-інструменти використано
 
 - Cursor (Grok 4.6) для скелета split-apps, адаптера Prisma 7, Nest-модулів, Docker і Next/Redux UI.
-- Правила matching і валідації лістингу написані звичайним TypeScript, щоб їх можна було рев’юити без «чорної скриньки».
+- Правила matching і валідації лістингу написані звичайним TypeScript, щоб їх можна було рев’юити.
 
 ### Що б доробив за більшого часу
 
-- Публічний хостинг того ж Compose (Railway / Fly / VPS) і httpOnly cookies.
-- Audit log для manager і NDA-гейт перед розкриттям seller.
+- Audit log для manager і NDA-гейт.
 - Повніший Playwright на три ролі (suspend → catalog hide).
 
 Фазований скоуп — у `ROADMAP.md`. Правила для агента — у `.cursor/rules/`.
+
+### Авторські права
+
+Тестове завдання для **n5Bank**. Дизайн і розробка: **PershkoAndrii**. Усі права захищено. Див. `LICENSE`.
 
 ---
 
@@ -262,8 +265,12 @@ cd web && npx playwright install chromium && npm run test:e2e
 
 ### What I would improve with more time
 
-- Host the same Compose on a public VPS and move auth to httpOnly cookies.
 - Manager audit log and NDA gate before revealing a seller.
 - A fuller Playwright path covering suspend → catalog hide.
 
 See `ROADMAP.md` for the phased scope. Agent conventions live in `.cursor/rules/`.
+
+### Copyright
+
+Take-home assignment for **n5Bank**. Designed and developed by **PershkoAndrii**. All rights reserved. See `LICENSE`.
+

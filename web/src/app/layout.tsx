@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { LocaleSync } from "@/components/layout/LocaleSync";
 import { StoreProvider } from "@/store/provider";
@@ -27,13 +28,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full text-foreground">
+      <body className="flex min-h-full flex-col text-foreground">
         <StoreProvider>
           <LocaleSync />
           <Header />
-          <main className="mx-auto min-h-[calc(100vh-4rem)] max-w-6xl px-4 py-8">
+          <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">
             {children}
           </main>
+          <Footer />
         </StoreProvider>
       </body>
     </html>

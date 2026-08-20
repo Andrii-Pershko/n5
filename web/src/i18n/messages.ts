@@ -217,6 +217,8 @@ export const en = {
   },
   common: {
     na: 'N/A',
+    copyright:
+      'Take-home prototype for n5Bank. Designed & developed by PershkoAndrii. All rights reserved.',
   },
 } as const;
 
@@ -439,6 +441,8 @@ export const uk: DeepString<typeof en> = {
   },
   common: {
     na: 'н/д',
+    copyright:
+      'Тестове завдання для n5Bank. Дизайн і розробка: PershkoAndrii. Усі права захищено.',
   },
 };
 
