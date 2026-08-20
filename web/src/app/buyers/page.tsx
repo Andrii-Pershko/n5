@@ -66,14 +66,14 @@ function BuyersDirectory() {
         countries={data?.meta.countries ?? []}
         licenses={data?.meta.licenses ?? []}
       />
-      {error && <p className="text-sm text-red-400">{error}</p>}
+      {error && <p className="text-sm text-red-600">{error}</p>}
       <p className="text-sm text-muted">{t('buyers.count', { count: data?.total ?? 0 })}</p>
       <div className="grid gap-4">
         {data?.items.map((buyer) => (
           <Link
             key={buyer.userId}
             href={`/buyers/${buyer.userId}`}
-            className="border border-line bg-card p-5 hover:border-gold/40 hover:bg-gold/5"
+            className="rounded-2xl border border-line bg-card p-5 shadow-[0_8px_30px_rgba(28,40,70,0.06)] hover:border-gold/40 hover:bg-gold/5"
           >
             <div className="flex items-start justify-between gap-4">
               <div>

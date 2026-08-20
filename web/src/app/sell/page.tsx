@@ -137,14 +137,14 @@ function PublishForm() {
           className="mt-1 w-full border border-line bg-card px-3 py-2 text-sm outline-none transition hover:border-gold/50 focus:border-gold"
         />
       </label>
-      {error && <p className="text-sm text-red-400">{error}</p>}
+      {error && <p className="text-sm text-red-600">{error}</p>}
       {done && <p className="text-sm text-gold">{done}</p>}
       {warnings.map((warning) => (
         <p key={warning} className="text-sm text-gold-2">
           {t('sell.smartValidation', { warning })}
         </p>
       ))}
-      <button className="rounded-full bg-gold px-5 py-2 text-sm text-background hover:bg-gold-2">
+      <button className="rounded-full bg-seller px-5 py-2 text-sm text-white hover:opacity-90">
         {t('sell.publish')}
       </button>
     </form>

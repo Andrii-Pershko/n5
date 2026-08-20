@@ -21,7 +21,7 @@ export function AssetFilters({
   const filters = useAppSelector((state) => state.filters);
 
   return (
-    <div className="border border-line bg-card p-4">
+    <div className="rounded-2xl border border-line bg-card p-4 shadow-[0_8px_30px_rgba(28,40,70,0.06)]">
       <div className="flex flex-wrap gap-2">
         <Checkbox
           checked={filters.category === ''}

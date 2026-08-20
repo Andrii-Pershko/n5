@@ -146,7 +146,7 @@ function MandateForm() {
         />
       </label>
       {status && <p className="text-sm text-gold">{status}</p>}
-      <button className="rounded-full bg-gold px-5 py-2 text-sm text-background hover:bg-gold-2">
+      <button className="rounded-full bg-gold px-5 py-2 text-sm text-white hover:bg-gold-2">
         {t('profile.save')}
       </button>
     </form>

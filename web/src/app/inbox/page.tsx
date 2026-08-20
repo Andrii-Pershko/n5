@@ -40,10 +40,10 @@ function Inbox() {
         <p className="text-xs uppercase tracking-[0.22em] text-gold">{t('inbox.kicker')}</p>
         <h1 className="mt-2 text-3xl">{t('inbox.title')}</h1>
       </div>
-      {error && <p className="text-sm text-red-400">{error}</p>}
+      {error && <p className="text-sm text-red-600">{error}</p>}
       {data?.total === 0 && <p className="text-muted">{t('inbox.empty')}</p>}
       {data?.items.map((item) => (
-        <article key={item.id} className="border border-line bg-card p-5">
+        <article key={item.id} className="rounded-2xl border border-line bg-card p-5 shadow-[0_8px_30px_rgba(28,40,70,0.06)]">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
               <div className="text-xs uppercase tracking-wider text-gold">

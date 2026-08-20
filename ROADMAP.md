@@ -53,7 +53,7 @@ Status:
 - [x] Seller hidden on public cards (`Confidential`)
 - [x] Match score + reasons on listings when buyer has a mandate
 - [x] Smart listing warnings (jurisdiction / license / ticket sanity)
-- [x] Visual language close to n5deal.com (dark + gold, Asset ID, Validated, TOP DEAL)
+- [x] Visual language close to n5deal.com (light UI, blue/green/purple accents, Asset ID, Validated, TOP DEAL)
 - [x] README with decisions, assumptions, AI usage, would-improve
 - [x] Docker deployed version (localhost after `docker compose up`)
 
@@ -67,7 +67,7 @@ Status:
 
 Still optional:
 
-- [ ] Public cloud host of the same Compose (Railway / Fly / VPS)
+- [x] Public cloud host of the same Compose (Railway / Fly / VPS)
 - [ ] Audit log for manager actions
 - [ ] NDA gate before revealing seller identity
 

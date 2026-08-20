@@ -40,5 +40,5 @@ New client state: add a slice next to the others, then whitelist it only if it m
 
 ## Tailwind
 
-Use the tokens in `globals.css`: `background`, `foreground`, `gold`, `gold-2`, `card`, `muted`, `line`.
-Dark fintech look (N5Deal-inspired). Do not introduce a second palette.
+Use the tokens in `globals.css`: `background`, `foreground`, `gold` (primary blue), `gold-2`, `card`, `muted`, `line`, `seller` (green), `partner` (purple).
+Light n5deal-inspired look (white cards, blue CTAs). Do not reintroduce the dark+gold palette.

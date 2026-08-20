@@ -33,7 +33,7 @@ export function Pagination({
           type="button"
           disabled={page <= 1}
           onClick={() => onPage(page - 1)}
-          className="border border-line px-3 py-1.5 text-muted hover:border-gold/50 hover:text-gold disabled:opacity-40"
+          className="rounded-full border border-line bg-card px-3 py-1.5 text-muted hover:border-gold/50 hover:text-gold disabled:opacity-40"
         >
           {t('pagination.prev')}
         </button>
@@ -43,10 +43,10 @@ export function Pagination({
             type="button"
             onClick={() => onPage(item)}
             className={classNames(
-              'min-w-9 border px-3 py-1.5',
+              'min-w-9 rounded-full border px-3 py-1.5',
               item === page
                 ? 'border-gold bg-gold/10 text-gold'
-                : 'border-line text-muted hover:border-gold/50 hover:text-gold',
+                : 'border-line bg-card text-muted hover:border-gold/50 hover:text-gold',
             )}
           >
             {item}
@@ -56,7 +56,7 @@ export function Pagination({
           type="button"
           disabled={page >= pageCount}
           onClick={() => onPage(page + 1)}
-          className="border border-line px-3 py-1.5 text-muted hover:border-gold/50 hover:text-gold disabled:opacity-40"
+          className="rounded-full border border-line bg-card px-3 py-1.5 text-muted hover:border-gold/50 hover:text-gold disabled:opacity-40"
         >
           {t('pagination.next')}
         </button>

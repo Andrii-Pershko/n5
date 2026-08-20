@@ -24,7 +24,7 @@ export default function HomePage() {
         {user ? (
           <Link
             href="/listings"
-            className="rounded-full bg-gold px-5 py-2 text-sm text-background hover:bg-gold-2"
+            className="rounded-full bg-gold px-5 py-2 text-sm text-white hover:bg-gold-2"
           >
             {t('home.continueSession')}
           </Link>
@@ -32,13 +32,13 @@ export default function HomePage() {
           <>
             <Link
               href="/signin"
-              className="rounded-full bg-gold px-5 py-2 text-sm text-background hover:bg-gold-2"
+              className="rounded-full bg-gold px-5 py-2 text-sm text-white hover:bg-gold-2"
             >
               {t('home.signInTitle')}
             </Link>
             <Link
               href="/register"
-              className="rounded-full border border-line px-5 py-2 text-sm text-muted hover:border-gold/50 hover:text-gold"
+              className="rounded-full bg-seller px-5 py-2 text-sm text-white hover:opacity-90"
             >
               {t('home.createAccount')}
             </Link>
@@ -46,7 +46,7 @@ export default function HomePage() {
         )}
         <Link
           href="/listings"
-          className="rounded-full border border-line px-5 py-2 text-sm text-muted hover:border-gold/50 hover:text-gold"
+          className="rounded-full border border-gold/30 bg-card px-5 py-2 text-sm text-gold hover:bg-gold/5"
         >
           {t('home.browseCatalog')}
         </Link>

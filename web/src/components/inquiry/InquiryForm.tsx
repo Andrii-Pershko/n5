@@ -39,14 +39,14 @@ export function InquiryForm({
 
   if (status === 'done') {
     return (
-      <div className="border border-gold/40 bg-gold/10 p-4 text-sm text-gold">
+      <div className="rounded-2xl border border-gold/30 bg-gold/10 p-4 text-sm text-gold">
         {t('inquiry.sent')}
       </div>
     );
   }
 
   return (
-    <div className="border border-line bg-card p-4">
+    <div className="rounded-2xl border border-line bg-card p-4">
       <h3 className="text-sm uppercase tracking-[0.16em] text-muted">{t('inquiry.title')}</h3>
       <textarea
         value={message}
@@ -55,11 +55,11 @@ export function InquiryForm({
         placeholder={placeholder}
         className="mt-3 w-full border border-line bg-background px-3 py-2 text-sm text-foreground"
       />
-      {error && <p className="mt-2 text-sm text-red-400">{error}</p>}
+      {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
       <button
         disabled={message.trim().length < 10 || status === 'loading'}
         onClick={() => void submit()}
-        className="mt-3 rounded-full bg-gold px-4 py-2 text-sm font-medium text-background hover:bg-gold-2 disabled:opacity-40"
+        className="mt-3 rounded-full bg-gold px-4 py-2 text-sm font-medium text-white hover:bg-gold-2 disabled:opacity-40"
       >
         {status === 'loading' ? t('inquiry.sending') : t('inquiry.send')}
       </button>

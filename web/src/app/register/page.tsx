@@ -46,7 +46,7 @@ export default function RegisterPage() {
       <p className="text-xs uppercase tracking-[0.22em] text-gold">{t('home.createAccount')}</p>
       <h1 className="mt-4 text-4xl leading-tight text-foreground">{t('home.createTitle')}</h1>
       <p className="mt-4 text-muted">{t('home.createHint')}</p>
-      <section className="mt-8 border border-line bg-card p-6">
+      <section className="mt-8 rounded-2xl border border-line bg-card p-6 shadow-[0_8px_30px_rgba(28,40,70,0.06)]">
         <form onSubmit={(event) => void onRegister(event)} className="space-y-3">
           <Field name="name" label={t('home.name')} required autoComplete="name" />
           <Field name="email" label={t('home.email')} type="email" required autoComplete="email" />
@@ -79,10 +79,10 @@ export default function RegisterPage() {
               ))}
             </div>
           </div>
-          {error && <p className="text-sm text-red-400">{error}</p>}
+          {error && <p className="text-sm text-red-600">{error}</p>}
           <button
             disabled={status === 'loading'}
-            className="rounded-full bg-gold px-5 py-2 text-sm text-background hover:bg-gold-2 disabled:opacity-40"
+            className="rounded-full bg-gold px-5 py-2 text-sm text-white hover:bg-gold-2 disabled:opacity-40"
           >
             {status === 'loading' ? t('home.creating') : t('home.submit')}
           </button>

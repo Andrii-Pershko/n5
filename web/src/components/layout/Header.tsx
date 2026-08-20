@@ -28,13 +28,13 @@ export function Header() {
   const locale = useAppSelector((state) => state.locale.locale);
 
   return (
-    <header className="sticky top-0 z-30 border-b border-line/80 bg-background/90 backdrop-blur">
+    <header className="sticky top-0 z-30 border-b border-line/80 bg-card/80 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
         <Link href={user ? '/listings' : '/'} className="flex items-center gap-2 hover:opacity-80">
-          <span className="grid h-8 w-8 place-items-center rounded-sm bg-gold text-xs font-bold text-background">
+          <span className="grid h-8 w-8 place-items-center rounded-lg bg-foreground text-xs font-bold text-card">
             N5
           </span>
-          <span className="text-sm font-semibold tracking-[0.18em] uppercase text-foreground">
+          <span className="text-sm font-semibold tracking-[0.12em] text-foreground">
             Deal
           </span>
         </Link>
@@ -47,8 +47,8 @@ export function Header() {
                 className={classNames(
                   'rounded-full px-3 py-1.5 text-sm transition',
                   pathname.startsWith(link.href)
-                    ? 'bg-card text-gold'
-                    : 'text-muted hover:bg-card/80 hover:text-gold',
+                    ? 'bg-gold/10 text-gold'
+                    : 'text-muted hover:bg-gold/5 hover:text-gold',
                 )}
               >
                 {t(link.labelKey)}
@@ -57,7 +57,7 @@ export function Header() {
           )}
         </nav>
         <div className="flex items-center gap-3 text-sm">
-          <div className="flex overflow-hidden rounded-full border border-line text-xs">
+          <div className="flex overflow-hidden rounded-full border border-line bg-card text-xs">
             {LOCALES.map((item) => (
               <button
                 key={item}
@@ -65,7 +65,7 @@ export function Header() {
                 onClick={() => dispatch(setLocale(item))}
                 className={classNames(
                   'px-2 py-1 uppercase first:rounded-l-full last:rounded-r-full',
-                  locale === item ? 'bg-gold/15 text-gold' : 'text-muted hover:text-gold',
+                  locale === item ? 'bg-gold/10 text-gold' : 'text-muted hover:text-gold',
                 )}
               >
                 {item}
@@ -95,7 +95,10 @@ export function Header() {
               <Link href="/register" className="text-muted hover:text-gold">
                 {t('nav.createAccount')}
               </Link>
-              <Link href="/signin" className="text-gold hover:text-gold-2">
+              <Link
+                href="/signin"
+                className="rounded-full bg-gold px-4 py-1.5 text-sm font-medium text-white hover:bg-gold-2"
+              >
                 {t('nav.signIn')}
               </Link>
             </>

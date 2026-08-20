@@ -57,7 +57,7 @@ export default function ListingsPage() {
         countries={data?.meta.countries ?? []}
         showMatchSort={user?.role === 'BUYER'}
       />
-      {error && <p className="text-sm text-red-400">{error}</p>}
+      {error && <p className="text-sm text-red-600">{error}</p>}
       <p className="text-sm text-muted">{t('listings.count', { count: data?.total ?? 0 })}</p>
       <div className="grid gap-4">
         {data?.items.map((asset) => (

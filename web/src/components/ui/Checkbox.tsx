@@ -18,7 +18,7 @@ export function Checkbox({
   return (
     <label
       className={classNames(
-        'group inline-flex items-center gap-2 border px-3 py-1.5 text-xs tracking-wider uppercase transition',
+        'group inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs tracking-wider uppercase transition',
         checked
           ? 'border-gold bg-gold/10 text-gold'
           : 'border-line text-muted hover:border-gold/45 hover:bg-gold/5 hover:text-foreground',
@@ -37,7 +37,7 @@ export function Checkbox({
         className={classNames(
           'grid h-3.5 w-3.5 shrink-0 place-items-center border transition',
           checked
-            ? 'border-gold bg-gold text-background'
+            ? 'border-gold bg-gold text-white'
             : 'border-line bg-background group-hover:border-gold/60',
         )}
       >

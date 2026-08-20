@@ -109,7 +109,7 @@ function AdminDesk() {
         placeholder={t('admin.searchPlaceholder')}
         className="w-full border border-line bg-card px-3 py-2 text-sm"
       />
-      {error && <p className="text-sm text-red-400">{error}</p>}
+      {error && <p className="text-sm text-red-600">{error}</p>}
       <section className="space-y-3">
         <h2 className="text-sm uppercase tracking-[0.16em] text-muted">{t('admin.users')}</h2>
         <div className="overflow-x-auto border border-line">
@@ -139,7 +139,7 @@ function AdminDesk() {
                         <button className="text-gold hover:text-gold-2" onClick={() => void toggleUser(user)}>
                           {user.status === 'ACTIVE' ? t('admin.suspend') : t('admin.restore')}
                         </button>
-                        <button className="text-red-400 hover:text-red-300" onClick={() => void removeUser(user)}>
+                        <button className="text-red-600 hover:text-red-700" onClick={() => void removeUser(user)}>
                           {t('admin.remove')}
                         </button>
                       </div>

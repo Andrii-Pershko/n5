@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { Field } from '@/components/ui/Field';
 import { useT } from '@/i18n/useT';
+import { classNames } from '@/lib/format';
 import { DEMO_ACCOUNTS } from '@/lib/types';
 import { login } from '@/store/slices/authSlice';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
@@ -61,9 +62,21 @@ export default function SignInPage() {
             key={account.email}
             onClick={() => void enter(account.email)}
             disabled={status === 'loading'}
-            className="border border-line bg-card px-2 py-3 text-center transition hover:border-gold/50 hover:bg-gold/5 disabled:opacity-40"
+            className={classNames(
+              'rounded-2xl border bg-card px-2 py-3 text-center transition disabled:opacity-40',
+              account.role === 'BUYER' && 'border-gold/35 hover:border-gold hover:bg-gold/5',
+              account.role === 'SELLER' && 'border-seller/35 hover:border-seller hover:bg-seller/5',
+              account.role === 'MANAGER' && 'border-partner/35 hover:border-partner hover:bg-partner/5',
+            )}
           >
-            <div className="text-[10px] uppercase tracking-[0.16em] text-gold">
+            <div
+              className={classNames(
+                'text-[10px] uppercase tracking-[0.16em]',
+                account.role === 'BUYER' && 'text-gold',
+                account.role === 'SELLER' && 'text-seller',
+                account.role === 'MANAGER' && 'text-partner',
+              )}
+            >
               {t(`roles.${account.role}`)}
             </div>
             <div className="mt-1 text-xs leading-snug text-foreground sm:text-sm">
@@ -74,7 +87,7 @@ export default function SignInPage() {
         ))}
       </div>
 
-      <section className="mt-8 border border-line bg-card p-6 text-left">
+      <section className="mt-8 rounded-2xl border border-line bg-card p-6 text-left shadow-[0_8px_30px_rgba(28,40,70,0.06)]">
         <p className="text-xs uppercase tracking-[0.22em] text-gold">{t('home.signInTitle')}</p>
         <p className="mt-2 text-sm text-muted">{t('home.classicHint')}</p>
         <form onSubmit={(event) => void onLogin(event)} className="mt-5 space-y-3">
@@ -86,10 +99,10 @@ export default function SignInPage() {
             required
             autoComplete="current-password"
           />
-          {error && <p className="text-sm text-red-400">{error}</p>}
+          {error && <p className="text-sm text-red-600">{error}</p>}
           <button
             disabled={status === 'loading'}
-            className="rounded-full bg-gold px-5 py-2 text-sm text-background hover:bg-gold-2 disabled:opacity-40"
+            className="rounded-full bg-gold px-5 py-2 text-sm text-white hover:bg-gold-2 disabled:opacity-40"
           >
             {status === 'loading' ? t('home.signingIn') : t('home.signInSubmit')}
           </button>
