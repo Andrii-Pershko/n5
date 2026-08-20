@@ -64,10 +64,10 @@ Status:
 - [x] EN/UK i18n (persisted locale)
 - [x] Automated tests beyond matching (auth signup, hard delete, buyer filters, i18n, Playwright smoke)
 - [x] Swap SQLite → Postgres
+- [x] Public cloud host of the same Compose (Railway / Fly / VPS)
 
 Still optional:
 
-- [x] Public cloud host of the same Compose (Railway / Fly / VPS)
 - [ ] Audit log for manager actions
 - [ ] NDA gate before revealing seller identity
 

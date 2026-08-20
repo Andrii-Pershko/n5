@@ -11,7 +11,7 @@ import {
 const adapter = new PrismaPg({
   connectionString:
     process.env.DATABASE_URL ??
-    'postgresql://n5deal:n5deal@localhost:5003/n5deal',
+    'postgresql://n5deal:n5deal@localhost:3303/n5deal',
 });
 const prisma = new PrismaClient({ adapter });
 
