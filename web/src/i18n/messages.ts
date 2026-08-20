@@ -215,6 +215,15 @@ export const en = {
     closedHint:
       'Your current role ({role}) cannot open this flow. Switch account from Sign in.',
   },
+  notFound: {
+    kicker: 'Page missing',
+    code: '404',
+    title: 'This listing is off the market.',
+    lead:
+      'The page does not exist, was moved, or the asset is no longer public. Browse the catalog or return home.',
+    home: 'Back home',
+    listings: 'Browse listings',
+  },
   common: {
     na: 'N/A',
     copyright:
@@ -438,6 +447,15 @@ export const uk: DeepString<typeof en> = {
     closed: 'Цей кабінет закритий',
     closedHint:
       'Поточна роль ({role}) не має доступу до цього флоу. Змініть акаунт на сторінці входу.',
+  },
+  notFound: {
+    kicker: 'Сторінку не знайдено',
+    code: '404',
+    title: 'Цього лістингу вже немає в каталозі.',
+    lead:
+      'Сторінка не існує, її перенесли, або актив більше не публічний. Перегляньте каталог або поверніться на головну.',
+    home: 'На головну',
+    listings: 'До лістингів',
   },
   common: {
     na: 'н/д',
